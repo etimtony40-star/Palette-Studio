@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Palette Studio · Color Palette Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="/images/image.png" type="image/x-icon">
+</head>
+<body class="is-loading">
+  <!-- SVG icon sprite: referenced elsewhere with <use href="#i-name"> -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3"/><rect x="4" y="11" width="16" height="10" rx="2.5"/></symbol>
+    <symbol id="i-unlock" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 9.6-2"/><rect x="4" y="11" width="16" height="10" rx="2.5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></symbol>
+  </svg>
+
+  <!-- Load page: shown for exactly 1.9s (see LOAD_MS in script.js) -->
+  <div id="loader" class="loader" role="status" aria-label="Loading Palette Studio">
+    <div class="loader__chips" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+    <p class="loader__title">Palette Studio</p>
+    <div class="loader__bar" aria-hidden="true"><i></i></div>
+  </div>
+
+  <div class="app">
+
+    <!-- Top toolbar: brand, primary action, favorites access -->
+    <header class="toolbar glass">
+      <div class="toolbar__start">
+        <h1 class="brand">Palette Studio</h1>
+        <!-- Theme switcher: five themes, state kept in script.js -->
+        <div id="themes" class="themes" role="group" aria-label="Theme">
+          <button class="theme-dot" type="button" data-theme="midnight" aria-pressed="true" aria-label="Midnight theme" title="Midnight"></button>
+          <button class="theme-dot" type="button" data-theme="ocean" aria-pressed="false" aria-label="Ocean theme" title="Ocean"></button>
+          <button class="theme-dot" type="button" data-theme="ember" aria-pressed="false" aria-label="Ember theme" title="Ember"></button>
+          <button class="theme-dot" type="button" data-theme="forest" aria-pressed="false" aria-label="Forest theme" title="Forest"></button>
+          <button class="theme-dot" type="button" data-theme="daylight" aria-pressed="false" aria-label="Daylight theme" title="Daylight"></button>
+        </div>
+      </div>
+
+      <button id="generate-btn" class="btn btn--primary" type="button">
+        <svg class="icon"><use href="#i-refresh"/></svg>
+        Generate new palette
+      </button>
+
+      <div class="toolbar__side">
+        <!-- Heart toggle: click to save a file, click again to unsave and delete it -->
+        <button id="save-btn" class="btn btn--heart" type="button" aria-pressed="false">
+          <svg class="icon"><use href="#i-heart"/></svg>
+          <span id="save-label">Save palette</span>
+        </button>
+        <button id="open-favorites-btn" class="btn" type="button" aria-controls="favorites-panel" aria-expanded="false">
+          Favorites <span id="fav-count" class="badge">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Five color cards. JS fills in color, hex text and lock state. -->
+    <main id="palette" class="palette glass" aria-label="Current color palette">
+      <article class="swatch" data-index="0">
+        <div class="swatch__actions">
+          <button class="icon-btn" type="button" data-action="lock" aria-pressed="false" aria-label="Lock color 1"><svg class="icon"><use href="#i-unlock"/></svg></button>
+          <button class="icon-btn" type="button" data-action="copy" aria-label="Copy color 1"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
+        <button class="swatch__hex" type="button" data-action="copy">#000000</button>
+      </article>
+      <article class="swatch" data-index="1">
+        <div class="swatch__actions">
+          <button class="icon-btn" type="button" data-action="lock" aria-pressed="false" aria-label="Lock color 2"><svg class="icon"><use href="#i-unlock"/></svg></button>
+          <button class="icon-btn" type="button" data-action="copy" aria-label="Copy color 2"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
+        <button class="swatch__hex" type="button" data-action="copy">#000000</button>
+      </article>
+      <article class="swatch" data-index="2">
+        <div class="swatch__actions">
+          <button class="icon-btn" type="button" data-action="lock" aria-pressed="false" aria-label="Lock color 3"><svg class="icon"><use href="#i-unlock"/></svg></button>
+          <button class="icon-btn" type="button" data-action="copy" aria-label="Copy color 3"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
+        <button class="swatch__hex" type="button" data-action="copy">#000000</button>
+      </article>
+      <article class="swatch" data-index="3">
+        <div class="swatch__actions">
+          <button class="icon-btn" type="button" data-action="lock" aria-pressed="false" aria-label="Lock color 4"><svg class="icon"><use href="#i-unlock"/></svg></button>
+          <button class="icon-btn" type="button" data-action="copy" aria-label="Copy color 4"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
+        <button class="swatch__hex" type="button" data-action="copy">#000000</button>
+      </article>
+      <article class="swatch" data-index="4">
+        <div class="swatch__actions">
+          <button class="icon-btn" type="button" data-action="lock" aria-pressed="false" aria-label="Lock color 5"><svg class="icon"><use href="#i-unlock"/></svg></button>
+          <button class="icon-btn" type="button" data-action="copy" aria-label="Copy color 5"><svg class="icon"><use href="#i-copy"/></svg></button>
+        </div>
+        <button class="swatch__hex" type="button" data-action="copy">#000000</button>
+      </article>
+    </main>
+
+    <p class="hint">Press <kbd>Space</kbd> to generate. Click any color to copy its hex code.</p>
+  </div>
+
+  <!-- Slide-out favorites sidebar (hidden until opened) -->
+  <div id="overlay" class="overlay" hidden></div>
+  <aside id="favorites-panel" class="sidebar glass" aria-label="Saved favorites" inert>
+    <header class="sidebar__head">
+      <h2>Saved favorites</h2>
+      <button id="close-favorites-btn" class="icon-btn" type="button" aria-label="Close favorites">
+        <svg class="icon"><use href="#i-close"/></svg>
+      </button>
+    </header>
+    <p id="fav-empty" class="empty">No saved palettes yet. Press “Save palette” to keep the current colors.</p>
+    <ul id="fav-list" class="fav-list"></ul>
+  </aside>
+
+  <!-- Toast notification (live region so screen readers announce it) -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
