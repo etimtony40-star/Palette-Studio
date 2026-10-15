@@ -1,0 +1,98 @@
+1. What does the application do?
+
+Palette studio is a sharp, modern interactive color curation tool
+built to streamline the brand layout generation process. The
+application enables users to instantly compile sets of five
+harmonized cards by clicking the prominent "Generate new palette"
+button or pressing the Spacebar keyboard command shortcut.
+
+Every color block displays its unique uppercase HEX code string
+clearly along the baseline. Users can click directly on any color
+card to copy the hex code immediately to their system clipboard.
+To protect high-performing design combinations, each swatch
+contains a hover-state shortcut menu featuring a Lock function 
+to freeze the color in place during subsequent palette rolls, 
+alongside a dedicated Copy button for swift extracting.
+
+Additionally, the interface tracks user bookmarks in real time with
+an integrated "Saved / Favorites" badge counter layout in the main
+toolbar.
+Note: The "Saved" feature directly saves the palette to your
+device.
+
+
+2. Who is the target audience it is built for?
+
+The application is custom-built for UI/UX Designers(mainly), who 
+require rapid, friction-free aesthetic ideation during initial
+style-guide wireframing and prototyping stages.
+
+It eliminates the clunky administrative process of manually editing
+hex strings by providing an intuitive, hyper-responsive visual canvas.
+
+3. What did you learn?
+
+ A.  Event-Driven Keyboard Integration: I learned how to intercept global window keyboard event listeners natively in JavaScript (keydown tracking for the Space bar) to execute central UI generator algorithms without requiring continuous button clicks.
+
+B   Component-Level Conditional State Management: The AI guided me on how to track individual Boolean array maps for the swatches (tracking whether isLocked is true or false). This ensures the generator engine selectively preserves targeted index blocks while updating unlocked values.
+
+C.  Modern Glassmorphic Dark-UI Aesthetics: I learned how to build high-end dark interfaces using modern CSS layer techniques—combining backdrop blurs (backdrop-filter), absolute overlay spacing rules for contextual utility menus, and glowing radial border shadows for principal action targets.
+
+Here's my project plan:
+
+ Product Requirements Document (PRD): Palette Studio
+ Project Name: Palette Studio (Interactive Design Curation Engine)
+ Target Hackathon: Devpost Build With AI: Basics
+ Architecture Type: Decoupled Single-Page Application (SPA)
+
+
+
+ 1. Product Vision & Executive Summary
+Palette Studio is a premium, high-fidelity dark-mode web dashboard designed to eliminate friction in creative brand asset creation. The application acts as a rapid-ideation engine that allows interface architects to generate, evaluate, freeze, and extract color systems seamlessly. The application is completely client-side, highly performant, and maps intuitive desktop key combinations directly to dynamic UI state adjustments.
+
+
+
+ 2. Target User Persona
+- Primary Audience: Creative UI/UX Designers, Product Illustrators, and Web Developers.
+- The Core Problem: Traditional asset curation workflows require tedious fine-tuning, constant copy-pasting of isolated values, and lack a quick mechanism to protect individual color choices during continuous iterative asset testing.
+- The Solution: A highly responsive grid engine providing instant generation, individual component freezing (locking), and global interaction hooks.
+
+
+ 3. Core Functional & UI Specifications (Based on Live Asset Layout)
+
+ FR-01: Global Action & Keyboard Hotkey Engine
+- UI Button Action: A prominent, glowing gradient primary action button labeled `Generate new palette` with a circular loop vector icon. Clicking triggers a complete random hex color recalculation.
+- Desktop Shortcut Hook: The system binds a global window listener to intercept `Spacebar` inputs. Pressing the Spacebar triggers the exact same canvas recalculation flow to maximize physical workflow speed.
+- Baseline Prompt: A centered informational footer reading: "Press [Space] to generate. Click any color to copy its hex code."
+
+ FR-02: Advanced Core Swatch Grid (5-Card Array)
+- The viewport displays exactly five vertical rectangular color blocks aligned dynamically side-by-side.
+- Every individual block renders its unique uppercase 6-digit hex string value near the bottom edge (e.g., `#BC4622`, `#88B8E5`).
+- The text layout automatically maintains crisp readability based on background contrast changes.
+
+ FR-03: Component Isolation Mode (Hover Context Menus)
+- Hovering focus over any color block displays an absolute-positioned vertical utility menu.
+- Lock Utility (Toggle): A button with a lock icon. Activating freezes that specific card's index values state (`isLocked = true`). Subsequent generation calls pass over locked indices and recalculate only unlocked color slots.
+- Copy Utility: A dedicated duplicate document sheet icon providing clean extraction parameters.
+
+ FR-04: Clipboard & Bookmarking HUD
+- Canvas Click Extraction: Clicking anywhere within a color card block copies its exact uppercase hex string to the system clipboard buffer immediately.
+- Favorites Counter Tracking: The global header tracking section implements a paired `Saved` button indicator badge directly coupled to a `Favorites` counter readout showing the real-time size of bookmarked parameters (e.g., `Favorites 1`).
+
+
+
+ 4. Engineering Architecture & Asset Boundaries
+To ensure structural elegance for the repository review, the production assets are cleanly decoupled:
+
+1. `index.html` - Restrained strictly to semantic layout layers (`.dashboard`, `.palette-container`, `.swatch`).
+2. `style.css` - Establishes the premium dark theme, radial glowing gradients, absolute positioning parameters for the hover icon groups, and glassmorphism styling parameters (`backdrop-filter`).
+3. `app.js` - Runs the active array math tracking systems, keyboard hotkey checks, and clipboard data routing.
+
+
+
+ 5. Deployment Checklist & Milestones
+- [x] Milestone 1: Build the core decoupled interface structures (`index.html`, `style.css`, `app.js`) in VS Code.
+- [x] Milestone 2: Verify structural alignment against the original design screenshot specifications.
+- [x] Milestone 3: Finalize the comprehensive project roadmap documentation (`prd.md`).
+- [ ] Milestone 4 Run full system evaluation via terminal utilizing `npx serve .`.
+- [ ] Milestone 5: Push file structures to a public open-source repository and log entry on the Devpost dashboard.
